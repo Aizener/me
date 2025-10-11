@@ -16,12 +16,12 @@ interface PostPreviewProps {
 function PostPreview({ title, content, className, onClose }: PostPreviewProps) {
   return (
     <div
-      className={`absolute w-full left-0 top-0 bg-background z-50 min-h-dvh ${className}`}
+      className={`bg-background absolute top-0 left-0 z-50 min-h-dvh w-full ${className}`}
       onClick={(e) => {
         e.stopPropagation();
       }}
     >
-      <Card className={clsx('w-5xl mx-auto')}>
+      <Card className={clsx('mx-auto w-5xl')}>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
         </CardHeader>
@@ -29,7 +29,7 @@ function PostPreview({ title, content, className, onClose }: PostPreviewProps) {
           <MarkdownRenderer content={content} />
         </CardContent>
       </Card>
-      <div className="fixed right-4 top-4">
+      <div className="fixed top-4 right-4">
         <Button variant="ghost" size="lg" onClick={() => onClose?.()}>
           <X />
         </Button>

@@ -39,13 +39,13 @@ const navs: NavType[] = [
 function HeaderNavs() {
   const pathname = usePathname();
   return (
-    <nav className="flex gap-x-5 mr-2">
+    <nav className="mr-2 flex gap-x-5">
       {navs.map((nav) => (
         <Link
           key={nav.path}
           href={nav.path}
           className={cn(
-            'cursor-pointer flex items-center gap-x-1 text-sm relative after:content-[""] after:h-0.5 after:bg-foreground/80 after:transition-all after:duration-300 after:w-0 after:absolute after:left-[50%] after:-translate-x-[50%] after:-bottom-1 after:origin-[center center]',
+            'after:bg-foreground/80 after:origin-[center center] relative flex cursor-pointer items-center gap-x-1 text-sm after:absolute after:-bottom-1 after:left-[50%] after:h-0.5 after:w-0 after:-translate-x-[50%] after:transition-all after:duration-300 after:content-[""]',
             nav.path.includes(pathname) ? 'after:w-full' : ''
           )}
         >

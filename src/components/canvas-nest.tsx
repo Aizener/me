@@ -30,7 +30,7 @@ export default function CanvasNest() {
   return (
     <div
       ref={ref}
-      className="fixed left-0 top-0 w-full h-full pointer-events-none -z-10"
+      className="pointer-events-none fixed top-0 left-0 -z-10 h-full w-full"
     ></div>
   );
 }

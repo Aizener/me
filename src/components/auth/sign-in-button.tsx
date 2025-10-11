@@ -41,7 +41,7 @@ function SignInButton() {
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-          className="font-bold underline cursor-pointer"
+          className="cursor-pointer font-bold underline"
           // onClick={() => signIn('google')}
         >
           登录
@@ -64,7 +64,7 @@ function SignInButton() {
             placeholder="请输入电子邮件..."
           />
           <Button
-            className="w-full mt-4"
+            className="mt-4 w-full"
             size={'lg'}
             variant="primary"
             onClick={handleSubmit}

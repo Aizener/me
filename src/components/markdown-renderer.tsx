@@ -25,7 +25,7 @@ function MarkdownRenderer({ content }: { content: string }) {
         h1: ({ id, children }) => (
           <h1
             id={`post-title-${id}`}
-            className="text-3xl font-bold my-8 border-b border-gray-500 pb-3"
+            className="my-8 border-b border-gray-500 pb-3 text-3xl font-bold"
           >
             {children}
           </h1>
@@ -33,20 +33,20 @@ function MarkdownRenderer({ content }: { content: string }) {
         h2: ({ id, children }) => (
           <h2
             id={`post-title-${id}`}
-            className="text-2xl font-semibold my-6 border-b border-gray-400 pb-2"
+            className="my-6 border-b border-gray-400 pb-2 text-2xl font-semibold"
           >
             {children}
           </h2>
         ),
         h3: ({ children }) => (
-          <h3 className="text-xl font-semibold mb-2">{children}</h3>
+          <h3 className="mb-2 text-xl font-semibold">{children}</h3>
         ),
         p: ({ children }) => <p className="mb-4 leading-relaxed">{children}</p>,
         ul: ({ children }) => (
-          <ul className="list-disc list-inside mb-4 space-y-1">{children}</ul>
+          <ul className="mb-4 list-inside list-disc space-y-1">{children}</ul>
         ),
         ol: ({ children }) => (
-          <ol className="list-decimal list-inside mb-4 space-y-1">
+          <ol className="mb-4 list-inside list-decimal space-y-1">
             {children}
           </ol>
         ),
@@ -61,7 +61,7 @@ function MarkdownRenderer({ content }: { content: string }) {
           <td className="border border-gray-500 p-2">{children}</td>
         ),
         blockquote: ({ children }) => (
-          <blockquote className="border-l-4 border-gray-300 pl-4 italic mb-4 bg-gray-100 pt-4 pr-2 pb-0.5">
+          <blockquote className="mb-4 border-l-4 border-gray-300 bg-gray-100 pt-4 pr-2 pb-0.5 pl-4 italic">
             {children}
           </blockquote>
         ),
@@ -93,7 +93,7 @@ function MarkdownRenderer({ content }: { content: string }) {
             </SyntaxHighlighter>
           ) : (
             <code
-              className={`${className} bg-gray-300 px-1 rounded-sm text-black/80 mx-1`}
+              className={`${className} mx-1 rounded-sm bg-gray-300 px-1 text-black/80`}
               {...props}
             >
               {children}
@@ -101,7 +101,7 @@ function MarkdownRenderer({ content }: { content: string }) {
           );
         },
         pre: ({ children }) => (
-          <pre className="py-0.5 px-2 border border-gray-300 shadow rounded-md my-2">
+          <pre className="my-2 rounded-md border border-gray-300 px-2 py-0.5 shadow">
             {children}
           </pre>
         ),

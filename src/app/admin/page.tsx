@@ -1,6 +1,6 @@
 function AdminPage() {
   return (
-    <div className="w-full h-32 flex justify-center items-center shadow-md rounded-md border border-background-200 font-mono text-3xl font-bold">
+    <div className="border-background-200 flex h-32 w-full items-center justify-center rounded-md border font-mono text-3xl font-bold shadow-md">
       Admin Page
     </div>
   );

@@ -7,7 +7,7 @@ function ThemeButton() {
   const { theme, setTheme } = useTheme();
   return (
     <div
-      className="flex items-center p-1 cursor-pointer"
+      className="flex cursor-pointer items-center p-1"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
       {theme === 'dark' && <Sun />}

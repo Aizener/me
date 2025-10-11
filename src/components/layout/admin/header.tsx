@@ -7,9 +7,9 @@ import Headbar from './headbar';
 
 function Header() {
   return (
-    <div className="w-full fixed left-0 top-0 h-16 border-b px-32 flex justify-between items-center bg-background/80 backdrop-blur-sm z-50">
+    <div className="bg-background/80 fixed top-0 left-0 z-50 flex h-16 w-full items-center justify-between border-b px-32 backdrop-blur-sm">
       <Link href="/home" prefetch={false}>
-        <Button variant="ghost" className="flex items-center cursor-pointer">
+        <Button variant="ghost" className="flex cursor-pointer items-center">
           <ArrowLeft />
           <span>回到首页</span>
         </Button>

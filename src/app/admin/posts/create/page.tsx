@@ -94,52 +94,52 @@ function BlogCreatePage() {
       {id && isLoadingData ? (
         <Loading />
       ) : (
-        <div className="w-full flex flex-col gap-y-2 border border-gray-200 p-4 rounded-md shadow">
-          <div className="flex justify-between items-center pb-4 border-b border-gray-200 mb-4">
-            <h2 className="text-lg font-bold text-foreground/80">
+        <div className="flex w-full flex-col gap-y-2 rounded-md border border-gray-200 p-4 shadow">
+          <div className="mb-4 flex items-center justify-between border-b border-gray-200 pb-4">
+            <h2 className="text-foreground/80 text-lg font-bold">
               创建博客文章
             </h2>
             <Button
               variant="ghost"
-              className="flex items-center gap-x-2 cursor-pointer"
+              className="flex cursor-pointer items-center gap-x-2"
               onClick={() => setPreview(!isPreview)}
             >
               {isPreview ? <EyeClosed /> : <Eye />}
-              <span className="font-bold text-foreground/80 text-sm">
+              <span className="text-foreground/80 text-sm font-bold">
                 {isPreview ? '编辑' : '预览'}
               </span>
             </Button>
           </div>
 
-          <Card className="shadow-none! border-none p-0">
+          <Card className="border-none p-0 shadow-none!">
             <CardHeader>
               <CardTitle>请在下面进行文章编辑</CardTitle>
             </CardHeader>
             <CardContent>
               <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                 <div className="space-y-2">
-                  <p className="text-sm font-bold pl-1">文章标题</p>
+                  <p className="pl-1 text-sm font-bold">文章标题</p>
                   <Input
                     placeholder="请输入文章标题"
                     className="mt-2"
                     {...register('title')}
                   />
-                  <p className="text-sm text-red-500 font-bold">
+                  <p className="text-sm font-bold text-red-500">
                     {errors?.title && '* 请输入4-30字的文章标题'}
                   </p>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-sm font-bold pl-1">文章内容</p>
+                  <p className="pl-1 text-sm font-bold">文章内容</p>
                   <Textarea
                     placeholder="请输入文章内容"
                     className="mt-2 h-64 resize-none"
                     {...register('content')}
                   />
-                  <p className="text-sm text-red-500 font-bold">
+                  <p className="text-sm font-bold text-red-500">
                     {errors?.content && '* 请输入文章内容'}
                   </p>
                 </div>
-                <div className="flex items-center gap-x-2 cursor-pointer select-none">
+                <div className="flex cursor-pointer items-center gap-x-2 select-none">
                   <Controller
                     name="published"
                     control={control}
@@ -152,7 +152,7 @@ function BlogCreatePage() {
                           onCheckedChange={field.onChange}
                         />
                         <p
-                          className="text-sm font-bold pl-1"
+                          className="pl-1 text-sm font-bold"
                           onClick={() => field.onChange(!field.value)}
                         >
                           是否直接发布

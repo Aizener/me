@@ -164,11 +164,11 @@ function SettingsPage() {
 
   return (
     <div>
-      <div className="border mt-4 shadow-md p-4 rounded-md">
+      <div className="mt-4 rounded-md border p-4 shadow-md">
         <h1 className="text-2xl font-bold">网站信息设置</h1>
         <Separator className="my-4" />
         <form onSubmit={handleSubmit(onSubmit)} className="py-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {form.map((item) => (
               <div key={item.field} className="min-h-16">
                 <div
@@ -179,7 +179,7 @@ function SettingsPage() {
                       : 'items-center'
                   )}
                 >
-                  <p className="w-24 font-bold text-sm text-right shrink-0">
+                  <p className="w-24 shrink-0 text-right text-sm font-bold">
                     {item.title}：
                   </p>
                   {item.type === 'input' && (
@@ -230,7 +230,7 @@ function SettingsPage() {
                           <div className="flex flex-col items-start">
                             <Input {...field} placeholder="请输入技术力描述" />
                             {fieldState.error && (
-                              <p className="text-sm font-bold text-red-500 mt-1">
+                              <p className="mt-1 text-sm font-bold text-red-500">
                                 {fieldState.error?.message}
                               </p>
                             )}
@@ -249,11 +249,11 @@ function SettingsPage() {
                                   <div>
                                     <Input
                                       {...field}
-                                      className="w-32 h-8"
+                                      className="h-8 w-32"
                                       placeholder="技术名称"
                                     />
                                     {fieldState.error && (
-                                      <p className="text-sm font-bold text-red-500 mt-1">
+                                      <p className="mt-1 text-sm font-bold text-red-500">
                                         {fieldState.error?.message}
                                       </p>
                                     )}
@@ -267,11 +267,11 @@ function SettingsPage() {
                                   <div>
                                     <Input
                                       {...field}
-                                      className="w-32 h-8"
+                                      className="h-8 w-32"
                                       placeholder="技术值"
                                     />
                                     {fieldState.error && (
-                                      <p className="text-sm font-bold text-red-500 mt-1">
+                                      <p className="mt-1 text-sm font-bold text-red-500">
                                         {fieldState.error?.message}
                                       </p>
                                     )}
@@ -298,7 +298,7 @@ function SettingsPage() {
                   )}
                 </div>
                 {errors[item.field as keyof FormData]?.message && (
-                  <p className="text-sm font-bold text-red-500 ml-28 mt-1">
+                  <p className="mt-1 ml-28 text-sm font-bold text-red-500">
                     {errors[item.field as keyof FormData]?.message}
                   </p>
                 )}

@@ -12,7 +12,7 @@ function Empty() {
     router.refresh();
   };
   return (
-    <div className="flex flex-col justify-center items-center size-full p-8 shadow rounded-md border border-gray-200">
+    <div className="flex size-full flex-col items-center justify-center rounded-md border border-gray-200 p-8 shadow">
       <Rainbow size={80} className="text-foreground/80" />
       <span className="text-foreground/80 font-bold">没有更多内容了</span>
       <div className="flex gap-x-4 p-4">

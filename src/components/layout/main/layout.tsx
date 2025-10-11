@@ -9,9 +9,9 @@ import Header from './header';
 function MainLayout({ children }: { children: ReactNode }) {
   return (
     <Providers>
-      <div className="flex flex-col w-full min-h-dvh md:w-3xl lg:w-4xl mx-auto">
+      <div className="mx-auto flex min-h-dvh w-full flex-col md:w-3xl lg:w-4xl">
         <Header />
-        <main className="mt-4 flex-1 relative">{children}</main>
+        <main className="relative mt-4 flex-1">{children}</main>
         <Footer />
         <CanvasNest />
       </div>

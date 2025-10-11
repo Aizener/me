@@ -100,28 +100,28 @@ function FloatingBar({ settings }: { settings: QueryWebsiteSettings[] }) {
   });
 
   return (
-    <div className="lg:fixed lg:w-[19rem]">
-      <div className="p-3 bg-background/50 rounded-md border shadow-sm">
-        <h1 className="text-lg font-bold text-center">公告栏</h1>
-        <div className="text-sm text-foreground/80 p-2">小站还在建设中哦~</div>
+    <div className="overflow-y-auto lg:fixed lg:max-h-[85vh] lg:w-[19rem]">
+      <div className="bg-background/50 rounded-md border p-3 shadow-sm">
+        <h1 className="text-center text-lg font-bold">公告栏</h1>
+        <div className="text-foreground/80 p-2 text-sm">小站还在建设中哦~</div>
       </div>
 
-      <div className="hidden lg:block p-3 bg-background/50 rounded-md border shadow-sm mt-4">
-        <h1 className="text-lg font-bold text-center">便捷搜索</h1>
-        <div className="py-2 flex flex-col gap-y-2">
+      <div className="bg-background/50 mt-4 hidden rounded-md border p-3 shadow-sm lg:block">
+        <h1 className="text-center text-lg font-bold">便捷搜索</h1>
+        <div className="flex flex-col gap-y-2 py-2">
           <Input
             placeholder="请输入后选择需要跳转的平台..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
-          <div className="flex items-center gap-2 text-xs text-foreground/80 flex-wrap">
+          <div className="text-foreground/80 flex flex-wrap items-center gap-2 text-xs">
             {searchPlatforms.map((item) => (
               <a
                 key={item.name}
                 href={`${item.url}/${item.path(searchText)}`}
                 target="_blank"
                 rel="noreferrer"
-                className="px-2 py-1 rounded-sm border border-background-200 hover:bg-foreground/10 transition-colors"
+                className="border-background-200 hover:bg-foreground/10 rounded-sm border px-2 py-1 transition-colors"
               >
                 {item.name}
               </a>
@@ -130,9 +130,9 @@ function FloatingBar({ settings }: { settings: QueryWebsiteSettings[] }) {
         </div>
       </div>
 
-      <div className="p-3 bg-background/50 rounded-md border shadow-sm mt-4">
-        <h1 className="text-lg font-bold text-center">技术力</h1>
-        <div className="text-sm text-foreground/80 p-2 space-y-2">
+      <div className="bg-background/50 mt-4 rounded-md border p-3 shadow-sm">
+        <h1 className="text-center text-lg font-bold">技术力</h1>
+        <div className="text-foreground/80 space-y-2 p-2 text-sm">
           {techEnergy.values.map((item) => (
             <div
               key={item.title}
@@ -143,21 +143,21 @@ function FloatingBar({ settings }: { settings: QueryWebsiteSettings[] }) {
             </div>
           ))}
         </div>
-        <div className="mt-2 pt-2 border-t text-sm">
+        <div className="mt-2 border-t pt-2 text-sm">
           {techEnergy.description}
         </div>
       </div>
 
-      <div className="p-3 bg-background/50 rounded-md border shadow-sm mt-4 space-y-1">
-        <div className="flex justify-between items-center text-sm">
+      <div className="bg-background/50 mt-4 space-y-1 rounded-md border p-3 shadow-sm">
+        <div className="flex items-center justify-between text-sm">
           <span>{version?.title}</span>
           <span>{version?.content}</span>
         </div>
-        <div className="flex justify-between items-center text-sm">
-          <span>运行时间</span>
+        <div className="flex items-center justify-between text-sm">
+          <span>已运行</span>
           <span>{runtime}天</span>
         </div>
-        <div className="flex justify-between items-center text-sm">
+        <div className="flex items-center justify-between text-sm">
           <span>{record?.title}</span>
           <span>{record?.content}</span>
         </div>

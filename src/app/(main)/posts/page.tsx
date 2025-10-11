@@ -28,7 +28,7 @@ async function BlogPage() {
           <Empty />
         )}
       </div>
-      <div className="w-full mt-4 flex justify-end">
+      <div className="mt-4 flex w-full justify-end">
         {total > 10 && <Page total={total} size={10} />}
       </div>
     </div>

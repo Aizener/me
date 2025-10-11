@@ -5,9 +5,9 @@ import { QueryPostType } from '@/lib/api/posts';
 
 function PostDetail({ post }: { post: QueryPostType }) {
   return (
-    <div className="w-full p-2 lg:w-4xl lg:p-4 rounded-md shadow border border-background-200">
-      <h1 className="text-2xl font-bold text-foreground">{post.title}</h1>
-      <div className="flex justify-between items-center border-b my-4 pb-4 text-sm text-foreground/80">
+    <div className="border-background-200 w-full rounded-md border p-2 shadow lg:w-4xl lg:p-4">
+      <h1 className="text-foreground text-2xl font-bold">{post.title}</h1>
+      <div className="text-foreground/80 my-4 flex items-center justify-between border-b pb-4 text-sm">
         <p>作者：{post.author.name || post.author.email}</p>
         <span>
           发布时间：{dayjs(post.createdAt).format('YYYY/MM/DD HH:mm')}

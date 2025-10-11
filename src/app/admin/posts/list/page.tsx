@@ -26,7 +26,7 @@ function PostsListPage() {
               />
             ))}
           </div>
-          <div className="w-full mt-4 flex justify-end">
+          <div className="mt-4 flex w-full justify-end">
             {data.data[1] > 10 && <Page total={data.data[1]} size={10} />}
           </div>
         </>

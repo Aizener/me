@@ -1,7 +1,7 @@
 'use client';
 function MusicOutchain() {
   return (
-    <div className="fixed bottom-0 right-[-200px] z-50">
+    <div className="fixed right-[-200px] bottom-0 z-50">
       <iframe
         width="100%"
         height="350"
