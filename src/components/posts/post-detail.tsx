@@ -9,7 +9,9 @@ function PostDetail({ post }: { post: QueryPostType }) {
       <h1 className="text-2xl font-bold text-foreground">{post.title}</h1>
       <div className="flex justify-between items-center border-b my-4 pb-4 text-sm text-foreground/80">
         <p>作者：{post.author.name || post.author.email}</p>
-        <span>发布时间：{dayjs(post.createdAt).format('YYYY/MM/DD HH:mm')}</span>
+        <span>
+          发布时间：{dayjs(post.createdAt).format('YYYY/MM/DD HH:mm')}
+        </span>
       </div>
       <div>
         <MarkdownRenderer content={post.content} />

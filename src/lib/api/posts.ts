@@ -27,7 +27,9 @@ export interface EditPostType {
 }
 
 export const queryPublicPostsList = async () => {
-  const res = await requestGet<[QueryPostType[], number]>('/api/posts/list/public');
+  const res = await requestGet<[QueryPostType[], number]>(
+    '/api/posts/list/public'
+  );
   return res;
 };
 

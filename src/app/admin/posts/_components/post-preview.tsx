@@ -21,9 +21,7 @@ function PostPreview({ title, content, className, onClose }: PostPreviewProps) {
         e.stopPropagation();
       }}
     >
-      <Card className={clsx(
-        'w-5xl mx-auto',
-      )}>
+      <Card className={clsx('w-5xl mx-auto')}>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
         </CardHeader>

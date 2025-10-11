@@ -1,9 +1,7 @@
 import Loading from '@/components/loading';
 
 function LoadingPage() {
-  return (
-    <Loading />
-  );
+  return <Loading />;
 }
 
 export default LoadingPage;

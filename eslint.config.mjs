@@ -11,25 +11,26 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.config({
-    extends: ['next/core-web-vitals', 'next/typescript'],
-    plugins: ['simple-import-sort'],
-    rules: {
-      'semi': ['warn', 'always'],
-      'quotes': ['error', 'single'],
-      'simple-import-sort/imports': 'error',
-      'simple-import-sort/exports': 'error'
-    }
-  }),
-  {
-    ignores: [
+    extends: [
+      'next/core-web-vitals',
+      'next/typescript',
+      'prettier',
+      'plugin:prettier/recommended',
+    ],
+    ignorePatterns: [
       'node_modules/**',
       '.next/**',
       'out/**',
       'build/**',
       'next-env.d.ts',
-      'src/components/ui/**'
+      'src/components/ui/**',
+      'src/generated/**',
     ],
-  },
+    rules: {
+      'prettier/prettier': ['warn', {}, { usePrettierrc: true }],
+      '@typescript-eslint/ban-ts-comment': 'off',
+    },
+  }),
 ];
 
 export default eslintConfig;

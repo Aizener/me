@@ -15,28 +15,21 @@ async function BlogPage() {
   return (
     <div>
       <div className="flex flex-col gap-y-4">
-        {
-          posts.length > 0 ? posts.map(item => (
+        {posts.length > 0 ? (
+          posts.map((item) => (
             <PostCard
               key={item.title}
               post={item}
               url={`/posts/${item.id}`}
               user={session?.user}
             />
-          )) : (
-            <Empty />
-          )
-        }
+          ))
+        ) : (
+          <Empty />
+        )}
       </div>
       <div className="w-full mt-4 flex justify-end">
-        {
-          total > 10 && (
-            <Page
-              total={total}
-              size={10}
-            />
-          )
-        }
+        {total > 10 && <Page total={total} size={10} />}
       </div>
     </div>
   );

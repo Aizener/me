@@ -8,11 +8,15 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token }) => {
-        console.log('%c [ token ]-11', 'font-size:13px; background:skyblue; color:#bf2c9f;', token);
+        console.log(
+          '%c [ token ]-11',
+          'font-size:13px; background:skyblue; color:#bf2c9f;',
+          token
+        );
         return token?.role === 'ADMIN';
       },
     },
-  },
+  }
 );
 
 export const config = { matcher: ['/admin/:path*'] };

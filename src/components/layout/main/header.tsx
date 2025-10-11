@@ -1,4 +1,5 @@
 'use client';
+
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
@@ -6,7 +7,9 @@ import UserProfile from '@/components/auth/user-profile';
 
 import HeaderNavs from './header-nav';
 
-const ThemeButton = dynamic(() => import('@/components/theme-button'), { ssr: false });
+const ThemeButton = dynamic(() => import('@/components/theme-button'), {
+  ssr: false,
+});
 
 function Header() {
   return (

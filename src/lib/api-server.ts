@@ -8,7 +8,7 @@ export const responseJSON = (data: unknown) => {
     status: 200,
     data,
     success: true,
-    message: 'ok'
+    message: 'ok',
   });
 };
 
@@ -17,6 +17,6 @@ export const responseError = (status: number, errMsg: string) => {
     status,
     success: true,
     data: null,
-    message: errMsg || 'Server Error.'
+    message: errMsg || 'Server Error.',
   });
 };

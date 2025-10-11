@@ -7,31 +7,31 @@ export async function GET(request: NextRequest) {
     const params = request.nextUrl.searchParams;
     const page = Number(params.get('page')) || 1;
     const pageSize = Number(params.get('pageSize')) || 10;
-  
+
     const data = await prisma.post.findMany({
       where: {
-        published: true
+        published: true,
       },
       take: pageSize,
       skip: (page - 1) * pageSize,
       include: {
-        author: true
+        author: true,
       },
       orderBy: {
-        createdAt: 'desc'
-      }
+        createdAt: 'desc',
+      },
     });
     const total = await prisma.post.count({
       where: {
-        published: true
+        published: true,
       },
     });
-  
+
     return NextResponse.json({
       status: 200,
       data: [data, total],
       success: true,
-      message: 'ok'
+      message: 'ok',
     });
   } catch (err: unknown) {
     const errMsg = (err as { message: string }).message;
@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
       status: 500,
       success: false,
       data: null,
-      message: errMsg
+      message: errMsg,
     });
   }
 }

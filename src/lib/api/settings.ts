@@ -8,14 +8,19 @@ export type QueryWebsiteSettings = {
 };
 
 export interface CreateWebsiteSettings {
-  [key: string]: unknown
-};
+  [key: string]: unknown;
+}
 export const getWebsiteSettings = async () => {
   const res = await requestGet<QueryWebsiteSettings[]>('/api/settings');
   return res;
 };
 
-export const createWebsiteSettings = async (createDto: CreateWebsiteSettings) => {
-  const res = await requestPost<QueryWebsiteSettings[]>('/api/settings', createDto);
+export const createWebsiteSettings = async (
+  createDto: CreateWebsiteSettings
+) => {
+  const res = await requestPost<QueryWebsiteSettings[]>(
+    '/api/settings',
+    createDto
+  );
   return res;
 };

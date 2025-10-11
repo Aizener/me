@@ -1,13 +1,18 @@
 'use client';
 
-import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 import { UserRole } from '@/lib/enum';
 
 import { Avatar, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
 import { Skeleton } from '../ui/skeleton';
 import SignInButton from './sign-in-button';
 
@@ -25,19 +30,24 @@ function UserProfile() {
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            {
-              data.user.role === UserRole.ADMIN && (
-                <DropdownMenuItem>
-                  <Link href="/admin">
-                    <Button variant="ghost">后台管理</Button>
-                  </Link>
-                </DropdownMenuItem>
-              )
-            }
+            {data.user.role === UserRole.ADMIN && (
+              <DropdownMenuItem>
+                <Link href="/admin">
+                  <Button variant="ghost">后台管理</Button>
+                </Link>
+              </DropdownMenuItem>
+            )}
             <DropdownMenuItem>
-              <Button variant="ghost" onClick={() => signOut({
-                callbackUrl: '/'
-              })}>退出登录</Button>
+              <Button
+                variant="ghost"
+                onClick={() =>
+                  signOut({
+                    callbackUrl: '/',
+                  })
+                }
+              >
+                退出登录
+              </Button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -15,23 +15,23 @@ export const authOptions: NextAuthOptions = {
     }),
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
-    })
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
   ],
   jwt: {
     maxAge: 60 * 60 * 24 * 7,
   },
   session: {
-    strategy: 'jwt'
+    strategy: 'jwt',
   },
   callbacks: {
     async jwt({ token, account, user }) {
       if (account && user) {
-        const u = user as User & { role: 'ADMIN' | 'USER'};
+        const u = user as User & { role: 'ADMIN' | 'USER' };
         token.id = u.id;
         token.role = u.role;
         token.email = u.email;
@@ -48,5 +48,5 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-  }
+  },
 };

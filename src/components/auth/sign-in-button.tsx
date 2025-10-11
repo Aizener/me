@@ -1,16 +1,22 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { signIn } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { Button } from '../ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../ui/dialog';
 import { Input } from '../ui/input';
 
 function SignInButton() {
-
   const [email, setEmail] = useState('');
   const pathname = usePathname();
 
@@ -19,17 +25,16 @@ function SignInButton() {
       toast.warning('请输入正确的电子邮箱地址！');
       return;
     }
-    
+
     signIn('email', {
       email,
-      callbackUrl: pathname
+      callbackUrl: pathname,
     });
   };
 
   const avoidDefaultDomBehavior = (e: Event) => {
     e.preventDefault();
   };
-
 
   return (
     <Dialog>
@@ -38,7 +43,9 @@ function SignInButton() {
           variant="ghost"
           className="font-bold underline cursor-pointer"
           // onClick={() => signIn('google')}
-        >登录</Button>
+        >
+          登录
+        </Button>
       </DialogTrigger>
 
       <DialogContent
@@ -53,7 +60,7 @@ function SignInButton() {
         <div>
           <Input
             value={email}
-            onChange={e => setEmail(e.currentTarget.value)}  
+            onChange={(e) => setEmail(e.currentTarget.value)}
             placeholder="请输入电子邮件..."
           />
           <Button
@@ -61,7 +68,9 @@ function SignInButton() {
             size={'lg'}
             variant="primary"
             onClick={handleSubmit}
-          >发送电子邮件</Button>
+          >
+            发送电子邮件
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

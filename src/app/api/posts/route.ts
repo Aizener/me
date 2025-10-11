@@ -1,6 +1,11 @@
 import { NextRequest } from 'next/server';
 
-import { CLIENT_QUERY_ERROR_STATUS, responseError, responseJSON, SERVER_ERROR_STATUS } from '@/lib/api-server';
+import {
+  CLIENT_QUERY_ERROR_STATUS,
+  responseError,
+  responseJSON,
+  SERVER_ERROR_STATUS,
+} from '@/lib/api-server';
 import prisma from '@/lib/prisma';
 
 export async function GET(request: NextRequest) {
@@ -12,8 +17,8 @@ export async function GET(request: NextRequest) {
     const post = await prisma.post.findUnique({
       where: { id },
       include: {
-        author: true
-      }
+        author: true,
+      },
     });
     return responseJSON(post);
   } catch (err: unknown) {
@@ -26,7 +31,7 @@ export async function POST(request: NextRequest) {
   try {
     const bodyData = await request.json();
     const post = await prisma.post.create({
-      data: bodyData
+      data: bodyData,
     });
 
     return responseJSON(post);
@@ -38,10 +43,10 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
-    const { id, ...bodyData} = await request.json();
+    const { id, ...bodyData } = await request.json();
     const post = await prisma.post.update({
       where: { id },
-      data: bodyData
+      data: bodyData,
     });
 
     return responseJSON(post);
