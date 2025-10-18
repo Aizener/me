@@ -22,12 +22,14 @@ import {
   queryPostDetail,
 } from '@/lib/api/posts';
 
+import PostCategories from '../_components/post-categories';
 import PostPreview from '../_components/post-preview';
 
 const schema = z.object({
   title: z.string().min(4).max(30),
   content: z.string().min(1),
   published: z.boolean(),
+  postCategoryId: z.string().min(1),
 });
 
 function BlogCreatePage() {
@@ -41,6 +43,7 @@ function BlogCreatePage() {
     queryFn: () => queryPostDetail(id),
     enabled: !!id,
   });
+
   const [isPreview, setPreview] = useState(false);
   const { mutate, isPending } = useMutation({
     mutationKey: [id ? 'editPost' + id : 'createPost'],
@@ -70,7 +73,7 @@ function BlogCreatePage() {
     if (data?.data && id) {
       reset(data.data);
     } else {
-      reset({ title: '', content: '', published: false });
+      reset({ title: '', content: '', published: false, postCategoryId: '' });
     }
   }, [id, data, reset]);
 
@@ -146,21 +149,38 @@ function BlogCreatePage() {
                     rules={{ required: true }}
                     render={({ field }) => (
                       <>
+                        <p
+                          className="pl-1 text-sm font-bold"
+                          onClick={() => field.onChange(!field.value)}
+                        >
+                          直接发布：
+                        </p>
                         <Switch
                           checked={field.value}
                           className="cursor-pointer"
                           onCheckedChange={field.onChange}
                         />
-                        <p
-                          className="pl-1 text-sm font-bold"
-                          onClick={() => field.onChange(!field.value)}
-                        >
-                          是否直接发布
-                        </p>
                       </>
                     )}
                   />
                 </div>
+                <div className="flex cursor-pointer items-center gap-x-2 select-none">
+                  <p className="pl-1 text-sm font-bold">分类选择：</p>
+                  <Controller
+                    name="postCategoryId"
+                    control={control}
+                    render={({ field }) => (
+                      <PostCategories
+                        id={field.value}
+                        onSelect={(id) => field.onChange(id)}
+                      />
+                    )}
+                  ></Controller>
+                  <p className="text-sm font-bold text-red-500">
+                    {errors?.postCategoryId && '* 请选择分类'}
+                  </p>
+                </div>
+
                 <div>
                   <Button type="submit" className="w-full" size="lg">
                     {isPending ? (

@@ -110,7 +110,7 @@ async function HomePage() {
             <p className="mt-2">
               现在的目标：做合适的<strong>JavaScript前端或全栈工作</strong>
               ，其他方向倒是对游戏开发还蛮感兴趣，<strong>Unity</strong>
-              是一个不错的方向（甚至还做过小游戏玩），不过那又是其他话题了...
+              是一个不错的方向（也尝试做过小游戏玩），不过那又是其他话题了...
             </p>
           </div>
         </div>

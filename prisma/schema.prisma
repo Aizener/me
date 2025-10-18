@@ -59,16 +59,30 @@ model VerificationToken {
 }
 
 model Post {
-  id        String    @id @default(cuid())
-  title     String
-  content   String
-  published Boolean   @default(false)
-  authorId  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  comments  Comment[]
-  likes     Like[]
+  id             String        @id @default(cuid())
+  title          String
+  content        String
+  published      Boolean       @default(false)
+  authorId       String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  author         User          @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments       Comment[]
+  likes          Like[]
+  postCategory   PostCategory? @relation(fields: [postCategoryId], references: [id])
+  postCategoryId String?
+}
+
+model PostCategory {
+  id    String @id @default(cuid())
+  name  String @unique
+  title String @unique
+  posts Post[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("PostCategory")
 }
 
 model Comment {
@@ -98,4 +112,3 @@ model Settings {
   name    String
   content String
 }
-

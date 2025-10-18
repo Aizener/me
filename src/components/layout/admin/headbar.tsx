@@ -1,6 +1,6 @@
 'use client';
 
-import { List, Newspaper, Plus, PodcastIcon } from 'lucide-react';
+import { LayoutList, List, Plus } from 'lucide-react';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
@@ -26,6 +26,11 @@ const menus = [
         title: '创建',
         icon: Plus,
         url: '/posts/create',
+      },
+      {
+        title: '分类',
+        icon: LayoutList,
+        url: '/posts/categories',
       },
     ],
   },

@@ -7,24 +7,28 @@ export async function GET(request: NextRequest) {
     const params = request.nextUrl.searchParams;
     const page = Number(params.get('page')) || 1;
     const pageSize = Number(params.get('pageSize')) || 10;
+    const postCategoryId = params.get('postCategoryId');
+
+    const whereCondition = {
+      published: true,
+      ...(postCategoryId ? { postCategoryId } : {}),
+    };
 
     const data = await prisma.post.findMany({
-      where: {
-        published: true,
-      },
+      where: whereCondition,
       take: pageSize,
       skip: (page - 1) * pageSize,
       include: {
         author: true,
+        postCategory: true,
       },
       orderBy: {
         createdAt: 'desc',
       },
     });
+
     const total = await prisma.post.count({
-      where: {
-        published: true,
-      },
+      where: whereCondition,
     });
 
     return NextResponse.json({

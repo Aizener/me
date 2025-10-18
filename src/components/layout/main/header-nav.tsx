@@ -3,12 +3,13 @@
 import { HomeIcon, LucideProps, Rss } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ForwardRefExoticComponent, ReactNode, RefAttributes } from 'react';
+import { ForwardRefExoticComponent } from 'react';
 
 import { cn } from '@/lib/utils';
 
 type NavType = {
   path: string;
+  activePath: string;
   title: string;
   icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'>>;
 };
@@ -16,11 +17,13 @@ type NavType = {
 const navs: NavType[] = [
   {
     path: '/home',
+    activePath: '/home',
     title: '首页',
     icon: HomeIcon,
   },
   {
-    path: '/posts',
+    path: '/posts/category/all',
+    activePath: '/posts',
     title: '博客',
     icon: Rss,
   },
@@ -46,7 +49,7 @@ function HeaderNavs() {
           href={nav.path}
           className={cn(
             'after:bg-foreground/80 after:origin-[center center] relative flex cursor-pointer items-center gap-x-1 text-sm after:absolute after:-bottom-1 after:left-[50%] after:h-0.5 after:w-0 after:-translate-x-[50%] after:transition-all after:duration-300 after:content-[""]',
-            nav.path.includes(pathname) ? 'after:w-full' : ''
+            pathname.includes(nav.activePath) ? 'after:w-full' : ''
           )}
         >
           <nav.icon size={16} />
