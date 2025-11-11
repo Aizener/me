@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Inter } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 
-import MusicOutchain from '@/components/music-outchain';
 import Providers from '@/components/providers';
 
 import './globals.css';
@@ -16,8 +15,6 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
 });
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'I am Cooola.',
@@ -43,7 +40,6 @@ export default function RootLayout({
       >
         <Providers>{children}</Providers>
         <ToastContainer />
-        {/* <MusicOutchain /> */}
       </body>
     </html>
   );

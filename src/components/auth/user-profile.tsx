@@ -25,21 +25,27 @@ function UserProfile() {
       {status === 'authenticated' && (
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <Avatar className="size-8">
+            <Avatar className="size-8 cursor-pointer">
               <AvatarImage src="https://img2.baidu.com/it/u=2889559798,3207819863&fm=253&fmt=auto&app=138&f=JPEG?w=514&h=500" />
             </Avatar>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent className="min-w-26 p-0">
             {data.user.role === UserRole.ADMIN && (
               <DropdownMenuItem>
                 <Link href="/admin">
-                  <Button variant="ghost">后台管理</Button>
+                  <Button
+                    variant="ghost"
+                    className="cursor-pointer hover:bg-gray-200"
+                  >
+                    后台管理
+                  </Button>
                 </Link>
               </DropdownMenuItem>
             )}
             <DropdownMenuItem>
               <Button
                 variant="ghost"
+                className="cursor-pointer hover:bg-gray-200"
                 onClick={() =>
                   signOut({
                     callbackUrl: '/',

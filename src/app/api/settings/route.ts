@@ -24,8 +24,8 @@ export async function POST(request: NextRequest) {
     const bodyData = await request.json();
 
     const ids: string[] = [];
-    const updates: string[] = [],
-      adds: string[] = [];
+    const updates: string[] = [];
+    const adds: string[] = [];
 
     for (const key in bodyData) {
       const item = bodyData[key];
@@ -42,17 +42,17 @@ export async function POST(request: NextRequest) {
     const updateSettings =
       updates.length > 0
         ? await prisma.$executeRawUnsafe(`
-      Update "Settings"
-      SET content = CASE ${updates.join(' ')} END
-      WHERE id IN (${ids.join(', ')});
-    `)
+            Update "Settings"
+            SET content = CASE ${updates.join(' ')} END
+            WHERE id IN (${ids.join(', ')});
+          `)
         : null;
     const addSettings =
       adds.length > 0
         ? await prisma.$executeRawUnsafe(`
-      INSERT INTO "Settings" (id, name, title, content)
-      VALUES ${adds.join(', ')};
-    `)
+            INSERT INTO "Settings" (id, name, title, content)
+            VALUES ${adds.join(', ')};
+          `)
         : null;
 
     revalidatePath('/');

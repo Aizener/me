@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
 import { CalendarIcon, CircleX, Plus } from 'lucide-react';
-import { revalidatePath } from 'next/cache';
 import { useEffect } from 'react';
 import {
   Controller,
@@ -24,11 +23,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
-import {
-  createWebsiteSettings,
-  getWebsiteSettings,
-  QueryWebsiteSettings,
-} from '@/lib/api/settings';
+import { createWebsiteSettings, getWebsiteSettings } from '@/lib/api/settings';
 import { cn } from '@/lib/utils';
 
 const schema = z.object({
@@ -63,7 +58,7 @@ const form = [
 type FormData = z.infer<typeof schema>;
 
 function SettingsPage() {
-  const { data, isPending, isError } = useQuery({
+  const { data } = useQuery({
     queryKey: ['settings'],
     queryFn: getWebsiteSettings,
   });

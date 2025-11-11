@@ -1,9 +1,12 @@
 'use client';
 
+import { Loader2Icon } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+
+import { cn } from '@/lib/utils';
 
 import { Button } from '../ui/button';
 import {
@@ -18,18 +21,48 @@ import { Input } from '../ui/input';
 
 function SignInButton() {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const pathname = usePathname();
 
-  const handleSubmit = () => {
-    if (email.trim() === '') {
-      toast.warning('请输入正确的电子邮箱地址！');
+  const handleSubmit = async () => {
+    if (loading) {
+      return;
+    }
+    // if (email.trim() === '') {
+    //   toast.warning('请输入正确的电子邮箱地址！');
+    //   return;
+    // }
+    if (username.trim() === '') {
+      toast.warning('请输入正确的用户名！');
+      return;
+    }
+    if (password.trim() === '') {
+      toast.warning('请输入正确的用户密码！');
       return;
     }
 
-    signIn('email', {
-      email,
+    setLoading(true);
+    const res = await signIn('credentials', {
       callbackUrl: pathname,
+      username,
+      password,
+      redirect: false,
     });
+    setLoading(false);
+    console.log('front res', res);
+    if (!res?.ok) {
+      toast.error('登录失败，请检查用户名和密码！');
+      return;
+    }
+
+    toast.success('登录成功！');
+    location.href = '/';
+    // signIn('email', {
+    //   email,
+    //   callbackUrl: pathname,
+    // });
   };
 
   const avoidDefaultDomBehavior = (e: Event) => {
@@ -49,27 +82,49 @@ function SignInButton() {
       </DialogTrigger>
 
       <DialogContent
-        className="w-80"
+        className="w-100"
         onPointerDownOutside={avoidDefaultDomBehavior}
         onInteractOutside={avoidDefaultDomBehavior}
       >
         <DialogHeader>
           <DialogTitle>用户登入</DialogTitle>
-          <DialogDescription>请输入您的电子邮箱</DialogDescription>
+          {/* <DialogDescription>请输入您的电子邮箱</DialogDescription> */}
+          <DialogDescription>请输入您的账号信息</DialogDescription>
         </DialogHeader>
-        <div>
-          <Input
+        <div className="flex flex-col gap-y-4">
+          {/* <Input
             value={email}
             onChange={(e) => setEmail(e.currentTarget.value)}
             placeholder="请输入电子邮件..."
+          /> */}
+          <Input
+            value={username}
+            onChange={(e) => setUsername(e.currentTarget.value)}
+            placeholder="请输入用户名..."
+          />
+          <Input
+            value={password}
+            type="password"
+            onChange={(e) => setPassword(e.currentTarget.value)}
+            placeholder="请输入用户密码..."
           />
           <Button
-            className="mt-4 w-full"
+            className={cn(
+              'mt-4 w-full',
+              loading ? 'cursor-not-allowed' : 'cursor-pointer'
+            )}
             size={'lg'}
-            variant="primary"
+            variant={loading ? 'default' : 'primary'}
             onClick={handleSubmit}
           >
-            发送电子邮件
+            {loading ? (
+              <div className="flex items-center gap-x-1">
+                <Loader2Icon className="animate-spin" />
+                <span>提交中...</span>
+              </div>
+            ) : (
+              '登入'
+            )}
           </Button>
         </div>
       </DialogContent>
