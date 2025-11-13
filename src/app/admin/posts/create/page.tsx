@@ -21,6 +21,8 @@ import {
   editPost,
   queryPostDetail,
 } from '@/lib/api/posts';
+import { getQiniuToken } from '@/lib/api/upload';
+import { updloadFileToQiniu } from '@/lib/qiniu-upload';
 
 import PostCategories from '../_components/post-categories';
 import PostPreview from '../_components/post-preview';
@@ -37,6 +39,7 @@ function BlogCreatePage() {
   const router = useRouter();
   const seachParams = useSearchParams();
   const id = seachParams.get('id') as string;
+  const [pasteLoading, setPasteLoading] = useState(false);
 
   const { data, isPending: isLoadingData } = useQuery({
     queryKey: ['postsDetail', id],
@@ -92,6 +95,38 @@ function BlogCreatePage() {
     );
   };
 
+  const onPasteContent = async (
+    e: React.ClipboardEvent<HTMLTextAreaElement>
+  ) => {
+    setPasteLoading(true);
+    try {
+      const pasteData = e.clipboardData;
+      const editor = document.getElementById('editor') as HTMLTextAreaElement;
+      if (pasteData.items[0].type.startsWith('image/')) {
+        e.preventDefault();
+        const file = pasteData.items[0].getAsFile();
+        if (file) {
+          const { data: token } = await getQiniuToken();
+          const res = await updloadFileToQiniu({
+            file,
+            token,
+            fileName: Date.now().toString() + (file.name ?? ''),
+          });
+          const markdown = `\n![alt](${`${process.env.NEXT_PUBLIC_QINIU_URL}/${res.key}`})\n\n`;
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          const text = editor.value;
+          editor.value = text.slice(0, start) + markdown + text.slice(end);
+
+          // 调整光标位置
+          editor.selectionStart = editor.selectionEnd = start + markdown.length;
+        }
+      }
+    } finally {
+      setPasteLoading(false);
+    }
+  };
+
   return (
     <>
       {id && isLoadingData ? (
@@ -133,11 +168,33 @@ function BlogCreatePage() {
                 </div>
                 <div className="space-y-2">
                   <p className="pl-1 text-sm font-bold">文章内容</p>
-                  <Textarea
-                    placeholder="请输入文章内容"
-                    className="mt-2 h-64 resize-none"
-                    {...register('content')}
-                  />
+                  <div className="relative mt-2 h-64 w-full">
+                    <Textarea
+                      id="editor"
+                      placeholder="请输入文章内容"
+                      className="h-full w-full resize-none"
+                      {...register('content')}
+                      contentEditable={true}
+                      onPaste={onPasteContent}
+                    />
+                    {pasteLoading && (
+                      <div className="absolute top-0 left-0 z-50 flex h-full w-full flex-col items-center justify-center bg-black/80 text-white">
+                        <div className="flex items-center gap-x-2 text-sm">
+                          <Loader2Icon className="animate-spin" />
+                          <span>粘贴中...</span>
+                        </div>
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          className="mt-2 cursor-pointer"
+                          type="button"
+                          onClick={() => setPasteLoading(false)}
+                        >
+                          取消
+                        </Button>
+                      </div>
+                    )}
+                  </div>
                   <p className="text-sm font-bold text-red-500">
                     {errors?.content && '* 请输入文章内容'}
                   </p>

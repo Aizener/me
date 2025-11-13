@@ -8,8 +8,7 @@ export const updloadFileToQiniu = async ({
   file: File;
   token: string;
   fileName: string;
-}) => {
-  console.log(file, token, fileName);
+}): Promise<{ hash: string; key: string }> => {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('token', token);
